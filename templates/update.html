@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Ma Page avec Sidebar</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        table, th, td {
+            border: 1px solid black;
+        }
+        th, td {
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h2>Classic Capital</h2>
+    </div>
+    <div class="sidebar">
+        <div class="logo">Managing system</div>
+        <input type="search" placeholder="Search...">
+        <ul class="menu">
+          <li onclick="showContent('add-article')" class="active"><i class="icon-dashboard"></i><span>Add Articles</span></li>
+          <li onclick="showContent('delup-article')" class="active"><i class="icon-dashboard"></i><span>Update\Delete Articles</span></li>
+          <li onclick="showContent('orders-article')" class="active"><i class="icon-dashboard"></i><span>Orders</span></li>
+          <li onclick="showContent('messages')" class="active"><i class="icon-dashboard"></i><span>Messages</span></li>
+        </ul>
+        <div class="switch">
+          <input type="checkbox" id="dark-mode">
+          <label for="dark-mode">Dark Mode</label>
+        </div>
+        <div class="logout">
+          <i class="icon-logout"></i><span>Logout</span>
+        </div>
+      </div>
+    <div class="main-content" id="main-content">
+        <!-- Main content goes here -->
+    </div>
+    <script>
+        function showContent(contentId) {
+            if (contentId === 'delup-article') {
+                // Use Fetch API to load the content of update.html into the main-content div
+                fetch('update.html')
+                    .then(response => response.text())
+                    .then(html => {
+                        document.getElementById('main-content').innerHTML = html;
+                    })
+                    .catch(error => {
+                        console.error('Failed to load content:', error);
+                    });
+            } else {
+                var content = 'You have selected ' + contentId;
+                document.getElementById('main-content').innerHTML = content;
+            }
+        }
+    </script>
+</body>
+</html]

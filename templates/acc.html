@@ -1,0 +1,945 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Ma Page avec Sidebar</title>
+    <style>
+        /* Add this CSS to your existing stylesheet */
+ body {
+   font-family: 'Arial', sans-serif;
+ }
+ 
+ .sidebar {
+   width: 250px;
+   height: 100vh;
+   background-color: #f8f8ff;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+   position: fixed;
+ }
+ 
+ .sidebar .logo {
+   margin: 20px 0;
+   font-size: 24px;
+   font-weight: bold;
+   color: #5d5fef;
+ }
+ 
+ .sidebar input[type="search"] {
+   margin: 10px 0;
+   padding: 10px;
+   width: 90%;
+   border: none;
+   border-radius: 15px;
+   box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.1);
+ }
+ 
+ .sidebar .menu {
+   list-style: none;
+   padding: 0;
+   width: 100%;
+ }
+ 
+ .sidebar .menu li {
+   width: 100%;
+   padding: 15px 0;
+   text-align: center;
+   color: #333;
+   cursor: pointer;
+   transition: background-color 0.3s;
+ }
+ 
+ .sidebar .menu li:hover,
+ .sidebar .menu li.active {
+   background-color: #e0e0ff;
+ }
+ 
+ .sidebar .menu li.active {
+   border-left: 5px solid #5d5fef;
+   background-color: #e0e0ff;
+   font-weight: bold;
+ }
+ 
+ .sidebar .menu li i {
+   margin-right: 8px;
+   font-size: 20px;
+   vertical-align: middle;
+ }
+ 
+ .sidebar .menu li span {
+   vertical-align: middle;
+ }
+ 
+ .sidebar .menu .logout {
+   margin-top: auto;
+   margin-bottom: 20px;
+ }
+ 
+ .sidebar .switch {
+   display: flex;
+   align-items: center;
+   margin: 20px 0;
+ }
+ 
+ .sidebar .switch input[type="checkbox"] {
+   margin-right: 10px;
+ }
+ h2{
+     color:#5d5fef;
+     font-family: Georgia, 'Times New Roman', Times, serif;
+ }
+ /* Add this CSS to your existing stylesheet */
+ .main-content {
+   margin-left: 250px; /* Same as the sidebar width */
+   padding: 20px;
+   width: calc(100% - 250px); /* Subtract the sidebar width from the total width */
+ }
+ .form-container {
+             max-width: 600px;
+             margin: 50px auto;
+             padding: 20px;
+             background: #fff;
+             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+             display: block; /* to override the 'display: none' from your form */
+         }
+ 
+         .form-container h2 {
+             font-size: 24px;
+             color: #333;
+             margin-bottom: 20px;
+         }
+ 
+         .form-container p {
+             font-size: 14px;
+             color: #666;
+             margin-bottom: 30px;
+         }
+ 
+         .form-group {
+             margin-bottom: 15px;
+         }
+ 
+         .form-group label {
+             display: block;
+             font-weight: bold;
+             margin-bottom: 5px;
+         }
+ 
+         .form-group input[type="text"],
+         .form-group input[type="number"],
+         .form-group input[type="email"],
+         .form-group input[type="password"] {
+             width: 100%;
+             padding: 10px;
+             border: 1px solid #ccc;
+             border-radius: 4px;
+             box-sizing: border-box; /* Added to keep padding inside the width */
+         }
+ 
+         .form-group input[type="text"]:focus,
+         .form-group input[type="number"]:focus {
+             outline: none;
+             border-color: #5d5fef;
+             box-shadow: 0 0 5px rgba(93, 95, 238, 0.5);
+         }
+ 
+         .form-group input::placeholder {
+             font-style: italic;
+             font-size: 12px;
+         }
+ 
+         .form-container button[type="submit"] {
+             display: block;
+             width: 100%;
+             padding: 10px;
+             background: #5d5fef;
+             color: #fff;
+             border: none;
+             border-radius: 4px;
+             cursor: pointer;
+             font-size: 16px;
+             font-weight: bold;
+             text-transform: uppercase;
+             margin-top: 20px;
+         }
+         .file-uploader {
+             border: 2px dashed #ccc;
+             border-radius: 10px;
+             padding: 20px;
+             text-align: center;
+             margin: 10px;
+         }
+ 
+         .file-uploader:hover {
+             border-color: #5d5fef;
+         }
+ 
+         .file-uploader input[type="file"] {
+             display: none; /* Hide the default file input */
+         }
+ 
+         .file-uploader label {
+             cursor: pointer;
+         }
+ 
+         .file-uploader img {
+             max-width: 100%;
+             height: auto;
+         }
+ 
+         .file-uploader-text {
+             color: #777;
+             margin-top: 10px;
+         }
+ 
+         .file-uploader .select-file-link {
+             color: #5d5fef;
+             text-decoration: underline;
+             cursor: pointer;
+         }
+ 
+         .file-type-text {
+             font-size: 12px;
+             color: #999;
+             margin-top: 10px;
+         }
+ 
+         /* delupdate css */
+         h2 {
+     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Une police propre et moderne */
+     text-align: center; /* Centrer le titre */
+     color: #333; /* Une couleur de texte subtile et professionnelle */
+     padding: 10px 0; /* Ajouter un peu d'espace autour du texte */
+     margin-bottom: 30px; /* Espacer le titre du contenu suivant */
+     position: relative; /* Nécessaire pour la position des éléments pseudo */
+     overflow: hidden; /* Garde les pseudo-éléments à l'intérieur des limites du titre */
+ }
+ 
+ h2::before, 
+ h2::after {
+     content: '';
+     position: absolute;
+     bottom: 0;
+     width: 50%;
+     height: 3px;
+     background-color: #5d5fef; /* Une couleur qui correspond à la palette de votre site */
+     transition: all 0.3s ease-in-out;
+ }
+ 
+ h2::before {
+     left: 50%;
+     transform: translateX(-100%);
+ }
+ 
+ h2::after {
+     right: 50%;
+     transform: translateX(100%);
+ }
+ 
+ h2:hover::before, 
+ h2:hover::after {
+     transform: translateX(0%);
+ }
+ 
+ /* Animation sur le survol du titre */
+ @keyframes fadeInUp {
+     from {
+         opacity: 0;
+         transform: translate3d(0, 20px, 0);
+     }
+ 
+     to {
+         opacity: 1;
+         transform: translate3d(0, 0, 0);
+     }
+ }
+ 
+ h2:hover {
+     animation: fadeInUp 0.7s ease both;
+     cursor: pointer; /* Indique que le titre est interactif */
+ }
+ #search-bar {
+     width: 100%; /* Utilisez la largeur maximale de l'élément conteneur */
+     padding: 10px 15px; /* Espacement interne pour une meilleure lisibilité */
+     font-size: 16px; /* Taille de police confortable pour la plupart des utilisateurs */
+     font-family: 'Arial', sans-serif; /* Police cohérente avec le reste de votre interface */
+     border: 2px solid #ddd; /* Une bordure subtile */
+     border-radius: 25px; /* Coins arrondis pour un look doux */
+     outline: none; /* Supprime le contour par défaut lors de la sélection */
+     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Une petite ombre portée pour le relief */
+     transition: all 0.3s ease; /* Transition douce pour les interactions */
+ }
+ 
+ #search-bar::placeholder {
+     color: #999; /* Couleur du texte indicatif */
+ }
+ 
+ #search-bar:focus {
+     border-color: #5d5fef; /* Couleur de la bordure lorsque la barre de recherche est active */
+     box-shadow: 0 2px 5px rgba(93, 95, 238, 0.2); /* Ombre portée plus prononcée lors de la sélection */
+ }
+ /* tableau */
+ .results-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.results-table th,
+.results-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+.results-table th {
+    background-color: #e0e0ff;
+    color: #333;
+}
+
+.results-table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.results-table tr:hover {
+    background-color: #e9e9e9;
+}
+
+.results-table img {
+    width: 100px; /* or your preferred width */
+    height: auto; /* maintain aspect ratio */
+    border-radius: 5px; /* optional, for rounded corners */
+}
+.edit-btn,
+.delete-btn {
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    margin: 0 5px;
+    font-size: 16px;
+}
+
+.edit-btn:hover,
+.delete-btn:hover {
+    color: #5d5fef; /* Change to your preferred hover color */
+}
+
+/* orders css */
+/* CSS pour la table des commandes */
+#orders-table {
+    margin: 50px auto; /* Centrer la table horizontalement avec une marge de 50px en haut et en bas */
+    width: 80%; /* Largeur de la table */
+    border-collapse: collapse; /* Fusionner les bordures des cellules */
+}
+
+#orders-table th, #orders-table td {
+    padding: 10px; /* Ajouter un peu d'espace à l'intérieur des cellules */
+    border: 1px solid #1e1ecb; /* Ajouter une bordure aux cellules */
+    text-align: center; /* Centrer le texte dans les cellules */
+}
+
+#orders-table th {
+    background-color: #e0e0ff; /* Couleur de fond pour les cellules d'en-tête */
+    color: #333; /* Couleur du texte pour les cellules d'en-tête */
+}
+
+#orders-table tbody tr:nth-child(even) {
+    background-color: #dd3030; /* Couleur de fond des lignes paires */
+}
+
+#orders-table tbody tr:hover {
+    background-color: #f2f2f2; /* Couleur de fond lorsqu'une ligne est survolée */
+}
+
+.updel{
+    background-color: #5d5fef ;
+    color:white;
+    width: 20%;
+    border-radius: 10px;
+}
+</style> 
+</head>
+<body>
+    <div class="header">
+        <h2>Books Capital</h2>
+    </div>
+    <div class="sidebar">
+        <div class="logo">Managing system</div>
+        <input type="search" placeholder="Search...">
+        <ul class="menu">
+          <li onclick="showContent('add-article')" class="active"><i class="icon-dashboard"></i><span>Add Book</span></li>
+          <li onclick="showContent('delup-article')" class="active"><i class="icon-dashboard"></i><span>Update\Delete Book</span></li>
+          <li onclick="showContent('orders-article')" class="active"><i class="icon-dashboard"></i><span>Orders</span></li>
+          
+        </ul>
+        <div class="switch">
+          <input type="checkbox" id="dark-mode">
+          <label for="dark-mode">Dark Mode</label>
+        </div>
+        <div class="logout">
+          <i class="icon-logout"></i><span>Logout</span>
+        </div>
+      </div>
+    <div class="main-content" id="main-content">
+        <!-- Main content goes here -->
+    </div>
+    
+    <script>
+        // Fonction de recherche d'articles
+        function searchArticles() {
+            var searchQuery = document.getElementById('search-bar').value;
+            console.log('Sending search query:', searchQuery);
+            fetch('/search_endpoint', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json', // Make sure the server knows we're sending JSON
+        },
+        body: JSON.stringify({ query: searchQuery }) // Send the search query as JSON
+    })
+    .then(response => response.json())
+.then(searchResults => {
+    let resultsContainer = document.getElementById('search-results');
+    resultsContainer.innerHTML = ''; // Clear previous results
+
+    if (searchResults.length === 0 || searchResults[0].message === 'No result found') {
+        resultsContainer.innerHTML = '<p>No articles found.</p>';
+    } else {
+        // Create a table element
+        let resultsTable = document.createElement('table');
+        resultsTable.className = 'results-table';
+
+        // Create a header row
+        let headerRow = resultsTable.insertRow();
+        let headers = ['Image','Title','Author','Genre','Description', 'Price', 'Quantity','Publication date','Pages','Language'];
+        headers.forEach(headerText => {
+            let headerCell = document.createElement('th');
+            headerCell.textContent = headerText;
+            headerRow.appendChild(headerCell);
+        });
+
+        // Iterate over each article and create a row in the table for each
+        searchResults.forEach(article => {
+            let row = resultsTable.insertRow();
+
+            // Create the image cell and append it to the row
+            let imageCell = row.insertCell();
+            let imageElement = document.createElement('img');
+            try {
+        let binaryData = atob(article.image);
+        let byteArray = new Uint8Array(binaryData.length);
+        for (let i = 0; i < binaryData.length; i++) {
+            byteArray[i] = binaryData.charCodeAt(i);
+        }
+        let blob = new Blob([byteArray], { type: 'image/jpeg' });
+
+        // Create object URL from binary data
+        let imageUrl = URL.createObjectURL(blob);
+        imageElement.src = imageUrl;
+    } catch (error) {
+        console.error('Error decoding image data:', error);
+        imageElement.src = ''; // Set empty source to display broken image icon
+    }
+    
+    // imageElement.alt = 'Article Image';
+    imageElement.style = 'width: 100px; height: 100px;'; // Adjust the size as needed
+    imageCell.appendChild(imageElement);
+
+            // Create and append the title cell
+            let titleCell = row.insertCell();
+            titleCell.textContent = article.title;
+
+            let authorCell = row.insertCell();
+            authorCell.textContent = article.author;
+
+            //Create and append the category cell
+            let genreCell = row.insertCell();
+            genreCell.textContent = article.genre;
+
+            let descCell = row.insertCell();
+            descCell.textContent = article.description;
+
+            // Create and append the price cell
+            let priceCell = row.insertCell();
+            priceCell.textContent = article.price;
+
+            // Create and append the quantity cell
+            let quantityCell = row.insertCell();
+            quantityCell.textContent = article.quantity;
+
+
+            let pdCell = row.insertCell();
+            pdCell.textContent = article.pd;
+
+            let pagesCell = row.insertCell();
+            pagesCell.textContent = article.pages;
+
+            let langCell = row.insertCell();
+            langCell.textContent = article.language;
+
+            // Create and append the actions cell
+            let actionsCell = row.insertCell();
+
+            // Create and append the edit button
+            // <!-- Ajoutez cette section à l'intérieur de la boucle forEach pour chaque article dans la table des résultats -->
+// Create and append the edit button
+let editButton = document.createElement('button');
+editButton.innerHTML = '&#9998;'; // Unicode pencil icon
+editButton.className = 'edit-btn';
+editButton.onclick = function() {
+    // Populate the form with article details for editing
+    populateEditForm(article);
+};
+actionsCell.appendChild(editButton);
+
+// Fonction pour pré-remplir le formulaire de modification avec les détails de l'article sélectionné
+function populateEditForm(article) {
+    let formContent = `
+        <div class="form-container">
+            <h2>Edit Book</h2>
+            <form id="edit-article-form" action="/update_article" method="post" enctype="multipart/form-data">
+                <div class="file-uploader">
+                    <label for="image-upload">
+                        <img id="image-display" src="${article.image}" alt="Article Image" style="width: 100px; height: 100px;">
+                        <p class="file-uploader-text">
+                            Drag and drop files here<br>
+                            or <span class="select-file-link">select an image</span> from your computer
+                        </p>
+                        <input type="file" id="image-upload" name="image" accept="image/*">
+                    </label>
+                </div>
+                <div class="form-group">
+                    <label for="title">Title:</label>
+                    <input type="text" id="title" name="title" value="${article.title}">
+                </div>
+                <div class="form-group">
+                    <label for="author">Author:</label>
+                    <input type="text" id="author" name="author" value="${article.author}">
+                </div>
+                <div class="form-group">
+                    <label for="genre">Genre:</label>
+                    <input type="text" id="genre" name="genre" value="${article.genre}">
+                </div>
+                <div class="form-group">
+                    <label for="description">Description:</label>
+                    <input type="text" id="description" name="description" value="${article.description}">
+                </div>
+                <div class="form-group">
+                    <label for="price">Price:</label>
+                    <input type="text" id="price" name="price" value="${article.price}">
+                </div>
+                
+                <div class="form-group">
+                    <label for="quantity">Quantity:</label>
+                    <input type="number" id="quantity" name="quantity" value="${article.quantity}">
+                </div>
+                <div class="form-group">
+                    <label for="pd">Publication Date:</label>
+                    <input type="date" id="pd" name="pd" value="${article.pd}">
+                </div>
+                <div class="form-group">
+                    <label for="pages">Pages:</label>
+                    <input type="text" id="pages" name="pages" value="${article.pages}">
+                </div>
+                <div class="form-group">
+                    <label for="language">Language:</label>
+                    <input type="text" id="language" name="language" value="${article.language}">
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="register-button">Update Article</button>
+                </div>
+            </form>
+        </div>
+    `;
+    
+    
+    document.getElementById('main-content').innerHTML = formContent;
+    }
+    function updateArticle(articleId) {
+    // Récupérer les données modifiées du formulaire
+    let formData = new FormData(document.getElementById('edit-article-form'));
+
+    // Ajouter l'ID de l'article modifié aux données du formulaire
+    formData.append('article_id', articleId);
+
+    // Envoyer les données modifiées au serveur
+    fetch('/update_article', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+        // Traiter la réponse du serveur (si nécessaire)
+        console.log('Server response:', data);
+        if (data.message === 'Article updated successfully') {
+            // Redirection vers la page d'accueil après la mise à jour réussie de l'article
+           
+        }
+        
+        // Afficher un message de confirmation ou rediriger l'utilisateur, etc.
+    })
+    .catch(error => {
+        console.error('Error updating article:', error);
+        // Gérer les erreurs de requête, par exemple afficher un message d'erreur à l'utilisateur
+    });
+}
+
+
+function deleteArticle(articleTitle) {
+    // Envoyer une requête AJAX au serveur pour supprimer l'article
+    fetch('/delete_article', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ title: articleTitle })
+    })
+    .then(response => {
+        if (response.ok) {
+            // Afficher un message de succès à l'utilisateur
+            alert('Article deleted successfully.');
+            // Recharger la page ou effectuer d'autres actions après la suppression réussie
+            window.location.reload();
+        } else {
+            // Afficher un message d'erreur si la suppression a échoué
+            alert('Failed to delete article.');
+        }
+    })
+    .catch(error => {
+        console.error('Error deleting article:', error);
+        // Afficher un message d'erreur générique en cas d'échec de la requête
+        alert('An error occurred while deleting the article.');
+    });
+}
+
+// Fonction de confirmation de la suppression
+function confirmDelete(articleTitle) {
+    var result = confirm("Are you sure you want to delete this article?");
+    if (result) {
+        // Si l'utilisateur clique sur "OK", appeler la fonction deleteArticle avec le titre de l'article
+        deleteArticle(articleTitle);
+    }
+}
+
+// Maintenant, vous devez attribuer cette fonction à votre bouton de suppression
+// Pour cela, modifiez votre création de bouton de suppression comme suit :
+let deleteButton = document.createElement('button');
+deleteButton.innerHTML = '&#10060;'; // Unicode cross icon
+deleteButton.className = 'delete-btn';
+deleteButton.setAttribute('data-article-title', article.title);
+deleteButton.onclick = function() {
+    let articleTitle = this.getAttribute('data-article-title');
+    // Appel de la fonction confirmDelete lors du clic sur le bouton
+    confirmDelete(articleTitle);
+};
+actionsCell.appendChild(deleteButton);
+        });
+        
+
+        // Append the table to the results container
+        resultsContainer.appendChild(resultsTable);
+        
+    }
+    
+})
+.catch(error => {
+    console.error('Failed to fetch search results:', error);
+    document.getElementById('search-results').innerHTML = '<p>Error fetching search results.</p>';
+});
+        }
+        // Fonction débouncée pour la recherche d'articles
+        let debounceTimer;
+        function debouncedSearchArticles() {
+            clearTimeout(debounceTimer);
+            debounceTimer = setTimeout(searchArticles, 300);
+        }
+        
+        function fetchOrdersAndPopulateTable() {
+    fetch('/get_orders')
+    .then(response => response.json())
+    .then(orders => {
+        const tableBody = document.getElementById('orders-table').querySelector('tbody');
+        tableBody.innerHTML = ''; // Clear the existing table body
+        
+        orders.forEach(order => {
+            const row = tableBody.insertRow();
+            row.innerHTML = `
+                <td>${order.ORDER_ID}</td>
+                <td>${order.DATE_OR}</td>
+                <td>${order.CARDHOLDER}</td>
+                <td>${order.EMAIL}</td>
+                <td>${order.STATUS}</td>
+                <td>${order.ADRESS}</td>
+                <td>${order.ITEMQUAN}</td>
+                <td>${Number(order.TOTAL_PRICE).toFixed(2) || '0.00'} $</td>
+            `;
+        });
+    })
+    .catch(error => {
+        console.error('Error fetching orders:', error);
+    });
+}
+
+function capitalize(str) {
+    return str.charAt(0).toUpperCase() + str.slice(1);
+}
+
+        // JavaScript function to display the form in the main content area
+        function showContent(contentId) {
+            var content;
+            if (contentId === 'add-article') {
+                
+        content = `
+            <div class="form-container">
+                <h2>Add Books</h2>
+                <form id="add-article-form" action="/submit_article" method="post" enctype="multipart/form-data">
+                    <div class="file-uploader">
+    <label for="image-upload">
+        <img id="image-display" src="" alt="Upload Image" style="display: none;" />
+        <p class="file-uploader-text">
+            Drag and drop files here<br>
+            or <span class="select-file-link">select an image</span> from your computer
+        </p>
+        <input type="file" id="image-upload" name="image" accept="image/*">
+    </label>
+</div>
+                            <div class="form-group">
+                                <label for="title">Title:</label>
+                                <input type="text" id="title" name="title" placeholder="Amazing Book">
+                            </div>
+                            <div class="form-group">
+                                <label for="author">Author:</label>
+                                <input type="text" id="author" name="author" placeholder="Author">
+                            </div>
+                            <div class="form-group">
+                                <label for="genre">Genre:</label>
+                                <input type="text" id="genre" name="genre" placeholder="Book type">
+                            </div>
+                            <div class="form-group">
+                                <label for="description">Description:</label>
+                                <input type="text" id="description" name="description" placeholder="Book description">
+                            </div>
+                            <div class="form-group">
+                                <label for="price">Price:</label>
+                                <input type="text" id="price" name="price" placeholder="19.99 $" >
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="quantity">Quantity:</label>
+                                <input type="number" id="quantity" name="quantity" placeholder="20">
+                            </div>
+                            <div class="form-group">
+                                <label for="pd">Publication Date:</label>
+                                <input type="date" id="pd" name="pd" placeholder="YYYY-MM-DD">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="pages">Pages:</label>
+                                <input type="text" id="pages" name="pages" placeholder="100">
+                            </div>
+                            <div class="form-group">
+                                <label for="language">Language:</label>
+                                <input type="text" id="language" name="language" placeholder="English">
+                            </div>
+                            <div class="form-group">
+                                <button type="submit" class="register-button">Add Article</button>
+                            </div>
+                        </form>
+                    </div>
+                    
+                `;
+                
+                document.getElementById('main-content').innerHTML = content;
+
+// Now the element exists, we can add the event listener
+var imageUploadInput = document.getElementById('image-upload');
+var imageDisplay = document.getElementById('image-display'); // Use ID instead of class for specificity
+
+imageUploadInput.addEventListener('change', function (event) {
+    var files = event.target.files;
+    if (files && files[0]) {
+        var fileReader = new FileReader();
+        fileReader.onload = function (e) {
+            imageDisplay.src = e.target.result;
+            imageDisplay.alt = 'Selected Image';
+            imageDisplay.style.display = 'block'; // Make sure the image is visible
+        };
+        fileReader.readAsDataURL(files[0]);
+    }
+});
+
+
+}
+
+else if (contentId === 'delup-article') {
+                content = `
+                    <center>
+                        <div class="form-container">
+                            <h2>Update/Delete Articles</h2>
+                            <input type="search" id="search-bar" placeholder="Search articles..." oninput="debouncedSearchArticles()">
+                            <div id="search-results">
+                                <!-- Les résultats de la recherche seront affichés ici -->
+                            </div>
+                        </div>
+                    </center>
+                `;
+                document.getElementById('main-content').innerHTML = content;
+                
+            }
+            
+            
+            
+            
+            
+            else if (contentId === 'orders-article') {
+                content = `
+                    <table id="orders-table">
+                        <thead>
+                            <tr>
+                                <th>Order ID</th>
+                                <th>Date/Time</th>
+                                <th>Customer</th>
+                                <th>Email</th>
+                                <th>Status</th>
+                                <th>Address</th>
+                                <th>Items</th>
+                                <th>Total</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Orders data will be inserted here -->
+                        </tbody>
+                    </table>
+                `;
+        document.getElementById('main-content').innerHTML = content;
+        
+        fetchOrdersAndPopulateTable();
+
+        document.getElementById('orders-table').addEventListener('click', function(event) {
+    var target = event.target;
+    // Assurez-vous que le clic a eu lieu sur une ligne de tableau
+    if (target.tagName === 'TD') {
+        // Obtenez la ligne parente de la cellule cliquée
+        var row = target.parentNode;
+        // Obtenez toutes les cellules de cette ligne
+        var cells = row.getElementsByTagName('td');
+        // Extrayez les données de chaque cellule
+        var orderId = cells[0].textContent;
+        var dateTime = cells[1].textContent;
+        var customer = cells[2].textContent;
+        var email = cells[3].textContent;
+        var status = cells[4].textContent;
+        var address = cells[5].textContent;
+        var items = cells[6].textContent;
+        var totalPrice = cells[7].textContent;
+
+        
+        
+        // Affichez un formulaire pré-rempli avec ces données
+        var formContent = `
+            <div class="form-container">
+                <h2>Order Details</h2>
+                <form id="order-details-form">
+                    <div class="form-group">
+                        <label for="order-id">Order ID:</label>
+                        <input type="text" id="order-id" name="order-id" value="${orderId}" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label for="date-time">Date/Time:</label>
+                        <input type="text" id="date-time" name="date-time" value="${dateTime}" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label for="customer">Customer:</label>
+                        <input type="text" id="customer" name="customer" value="${customer}" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email:</label>
+                        <input type="text" id="email" name="email" value="${email}" readonly>
+                    </div>
+                    <div class="form-group">
+    <label for="status">Statut de la Commande:</label>
+    <select id="status" name="status">
+        <option value="In_Process">In process</option>
+        <option value="Shipped">Shipped</option>
+        <option value="Out for Delivery">Out For Delivery</option>
+        <option value="Delivered">Delivered</option>
+    </select>
+</div>
+                    <div class="form-group">
+                        <label for="address">Address:</label>
+                        <input type="text" id="address" name="address" value="${address}" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label for="items">Items:</label>
+                        <textarea id="items" name="items" readonly>${items}</textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="total-price">Total Price:</label>
+                        <input type="text" id="total-price" name="total-price" value="${totalPrice}" readonly>
+                    </div>
+                </form>
+            </div>
+            <center>
+                <div class="form-group">
+                
+                <button type="button" class="updel">Edit Order's Status</button>
+                </div>
+            </center>    
+        `;
+        
+        document.getElementById('main-content').innerHTML = formContent;
+        document.getElementById('main-content').addEventListener('click', function(event) {
+    if (event.target.classList.contains('updel')) {
+        var newStatus = document.getElementById('status').value;
+        var orderId = document.getElementById('order-id').value; // Vous devez récupérer l'ID de la commande à partir du formulaire
+        var data = {
+            orderId: orderId,
+            newStatus: newStatus
+        };
+
+        // Envoi des données à Flask via une requête AJAX
+        fetch('/update_order_status', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        }).then(response => {
+            if (response.ok) {
+                return response.json();
+            }
+            throw new Error('Network response was not ok.');
+        }).then(data => {
+            // Gérer la réponse de Flask si nécessaire
+            console.log(data);
+            // Ajoutez ici votre logique de gestion de la réponse de Flask
+        }).catch(error => {
+            console.error('There was a problem with your fetch operation:', error);
+        });
+    }
+});
+
+    }
+});
+
+
+
+        
+            }
+            
+
+
+
+            else {
+                content = 'You have selected ' + contentId;
+                document.getElementById('main-content').innerHTML = content;
+            }
+
+            
+        }
+        
+        // Ajoutez ici les autres fonctions JavaScript que vous pourriez avoir
+    </script>
+</body>
+</html>
